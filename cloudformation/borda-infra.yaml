@@ -96,7 +96,7 @@ Resources:
   ECSSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Allow ALB -> ECS
+      GroupDescription: Allow traffic from ALB to ECS container on port 5000
       VpcId: !Ref VPC
       SecurityGroupIngress:
         - IpProtocol: tcp

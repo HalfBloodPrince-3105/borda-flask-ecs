@@ -4,17 +4,17 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPO_URI
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 796973512271.dkr.ecr.us-east-1.amazonaws.com
   build:
     commands:
       - echo Build started on `date`
-      - docker build -t $REPO_URI:latest .
-      - docker tag $REPO_URI:latest $REPO_URI:latest
+      - docker build -t borda-flask .
+      - docker tag borda-flask:latest 796973512271.dkr.ecr.us-east-1.amazonaws.com/borda-flask:latest
   post_build:
     commands:
       - echo Build completed on `date`
-      - docker push $REPO_URI:latest
-      - printf '[{"name":"borda-container","imageUri":"%s"}]' $REPO_URI:latest > imagedefinitions.json
+      - docker push 796973512271.dkr.ecr.us-east-1.amazonaws.com/borda-flask:latest
+      - printf '[{"name":"borda-container","imageUri":"796973512271.dkr.ecr.us-east-1.amazonaws.com/borda-flask:latest"}]' > imagedefinitions.json
 
 artifacts:
   files: imagedefinitions.json
